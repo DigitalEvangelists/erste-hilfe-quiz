@@ -29,6 +29,10 @@ body {
   cursor: pointer;
 }
 
+.option-button:focus {
+  outline: none; /* Entfernt den Fokus-Rahmen */
+}
+
 .option-button:hover {
   background-color: #0056b3;
 }
