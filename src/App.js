@@ -51,7 +51,7 @@ function App() {
         } else {
           setShowSummary(true);
         }
-      }, 3500);
+      }, 4000);
     }
   };
 
