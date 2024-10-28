@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/erste-hilfe-quiz/static/css/main.ca479aea.css",
-    "main.js": "/erste-hilfe-quiz/static/js/main.0d31d069.js",
+    "main.js": "/erste-hilfe-quiz/static/js/main.38eb8a23.js",
     "static/media/juh_logo.png": "/erste-hilfe-quiz/static/media/juh_logo.506f4c29aa2bf1f9c9ec.png",
     "index.html": "/erste-hilfe-quiz/index.html",
     "main.ca479aea.css.map": "/erste-hilfe-quiz/static/css/main.ca479aea.css.map",
-    "main.0d31d069.js.map": "/erste-hilfe-quiz/static/js/main.0d31d069.js.map"
+    "main.38eb8a23.js.map": "/erste-hilfe-quiz/static/js/main.38eb8a23.js.map"
   },
   "entrypoints": [
     "static/css/main.ca479aea.css",
-    "static/js/main.0d31d069.js"
+    "static/js/main.38eb8a23.js"
   ]
 }
