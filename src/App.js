@@ -32,16 +32,15 @@ function App() {
 
   const handleAnswer = (index) => {
     if (questionCatalog[currentQuestionIndex]) {
-      const isCorrect = index === questionCatalog[currentQuestionIndex].correctOptionIndex;
+      const correctOptionIndex = questionCatalog[currentQuestionIndex].correctOptionIndex;
+      const isCorrect = index === correctOptionIndex;
       setUserAnswers([...userAnswers, isCorrect]);
       if (isCorrect) {
         setScore(score + 1);
         setFeedback("RICHTIG");
-        setShowCorrectAnswer(false);
       } else {
         setFeedback("Leider falsch");
         setShowCorrectAnswer(true);
-        setUserAnswers([...userAnswers, false]);
       }
       setTimeout(() => {
         setFeedback(null);
@@ -52,7 +51,7 @@ function App() {
         } else {
           setShowSummary(true);
         }
-      }, 2000);
+      }, 3000);
     }
   };
 
@@ -102,10 +101,7 @@ function App() {
               <p>{questionCatalog[currentQuestionIndex].question}</p>
               <div className="options">
                 {questionCatalog[currentQuestionIndex].options.map((option, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleAnswer(index)}
-                    className={`option-button ${showCorrectAnswer && index === questionCatalog[currentQuestionIndex].correctOptionIndex ? 'correct-answer' : ''}`}
+                  <button key={index} onClick={() => handleAnswer(index)} className={`option-button ${showCorrectAnswer && index === questionCatalog[currentQuestionIndex].correctOptionIndex ? 'correct-answer' : ''}`} disabled={feedback !== null}
                   >
                     {option}
                   </button>
