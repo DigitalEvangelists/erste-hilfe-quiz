@@ -11,6 +11,7 @@ function App() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [feedback, setFeedback] = useState(null);
   const [questionCatalog, setQuestionCatalog] = useState([]);
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
 
   useEffect(() => {
     // Fragen aus der Excel-Datei laden und parsen
@@ -36,18 +37,22 @@ function App() {
       if (isCorrect) {
         setScore(score + 1);
         setFeedback("RICHTIG");
+        setShowCorrectAnswer(false);
       } else {
         setFeedback("Leider falsch");
+        setShowCorrectAnswer(true);
+        setUserAnswers([...userAnswers, false]);
       }
       setTimeout(() => {
         setFeedback(null);
+        setShowCorrectAnswer(false);
         const nextQuestionIndex = currentQuestionIndex + 1;
         if (nextQuestionIndex < questionCatalog.length) {
           setCurrentQuestionIndex(nextQuestionIndex);
         } else {
           setShowSummary(true);
         }
-      }, 1000);
+      }, 2000);
     }
   };
 
@@ -57,6 +62,7 @@ function App() {
     setShowSummary(false);
     setUserAnswers([]);
     setFeedback(null);
+    setShowCorrectAnswer(false);
   };
 
   return (
@@ -77,9 +83,6 @@ function App() {
             ))}
           </ul>
           <button onClick={startQuiz}>Erneut starten</button>
-          <footer className="footer">
-            Quiz zum Erste-Hilfe-Kurs bei der Johanniter-Unfall-Hilfe - (C) Digital Evangelists, Hamburg - V1.3 Okt 2024
-          </footer>
         </div>
       ) : currentQuestionIndex === -1 ? (
         <div className="start-page">
@@ -88,7 +91,7 @@ function App() {
           <p>Es werden {questionCatalog.length} Fragen gestellt.</p>
           <button onClick={startQuiz}>Start</button>
           <footer className="footer">
-            Quiz zum Erste-Hilfe-Kurs bei der Johanniter-Unfall-Hilfe - (C) Digital Evangelists, Hamburg - V1.3 Okt 2024
+            Quiz zum Erste-Hilfe-Kurs bei der Johanniter-Unfall-Hilfe - (C) Digital Evangelists, Hamburg - V1.1 Okt 2024
           </footer>
         </div>
       ) : (
@@ -102,7 +105,7 @@ function App() {
                   <button
                     key={index}
                     onClick={() => handleAnswer(index)}
-                    className="option-button"
+                    className={`option-button ${showCorrectAnswer && index === questionCatalog[currentQuestionIndex].correctOptionIndex ? 'correct-answer' : ''}`}
                   >
                     {option}
                   </button>
