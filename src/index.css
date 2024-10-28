@@ -69,13 +69,17 @@ button:hover {
 }
 
 .feedback-correct {
+  margin-top: 2em;
   color: #052456;
   background-color: #d4edda;
+  border: 1px solid grey;
 }
 
 .feedback-wrong {
+  margin-top: 2em;
   color: #EB003B;
   background-color: #f8d7da;
+  border: 1px solid grey;
 }
 
 .score {
@@ -91,9 +95,17 @@ button:hover {
 }
 
 .option-button.correct-answer {
-  background-color: #28a745; /* Grün, um die richtige Antwort hervorzuheben */
+  background-color: #28a745; 
   color: white;
-  border: 2px solid #218838; /* Ein etwas dunklerer Grünton als Rand */
+  border: 2px solid #218838; 
   font-weight: bold;
+  font-size: 135%;
+}
+
+.option-button.selected-answer {
+  background-color: #0056b3; 
+  color: white; 
+  border: 2px solid #004494; 
+  font-weight: bold; 
   font-size: 135%;
 }

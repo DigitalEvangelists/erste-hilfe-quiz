@@ -12,6 +12,7 @@ function App() {
   const [feedback, setFeedback] = useState(null);
   const [questionCatalog, setQuestionCatalog] = useState([]);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
 
   useEffect(() => {
     // Fragen aus der Excel-Datei laden und parsen
@@ -33,6 +34,7 @@ function App() {
   const handleAnswer = (index) => {
     if (questionCatalog[currentQuestionIndex]) {
       const correctOptionIndex = questionCatalog[currentQuestionIndex].correctOptionIndex;
+      setSelectedAnswerIndex(index);
       const isCorrect = index === correctOptionIndex;
       setUserAnswers([...userAnswers, isCorrect]);
       if (isCorrect) {
@@ -45,13 +47,14 @@ function App() {
       setTimeout(() => {
         setFeedback(null);
         setShowCorrectAnswer(false);
+        setSelectedAnswerIndex(null);
         const nextQuestionIndex = currentQuestionIndex + 1;
         if (nextQuestionIndex < questionCatalog.length) {
           setCurrentQuestionIndex(nextQuestionIndex);
         } else {
           setShowSummary(true);
         }
-      }, 4000);
+      }, 6000);
     }
   };
 
@@ -62,6 +65,7 @@ function App() {
     setUserAnswers([]);
     setFeedback(null);
     setShowCorrectAnswer(false);
+    setSelectedAnswerIndex(null);
   };
 
   return (
@@ -101,7 +105,11 @@ function App() {
               <p>{questionCatalog[currentQuestionIndex].question}</p>
               <div className="options">
                 {questionCatalog[currentQuestionIndex].options.map((option, index) => (
-                  <button key={index} onClick={() => handleAnswer(index)} className={`option-button ${showCorrectAnswer && index === questionCatalog[currentQuestionIndex].correctOptionIndex ? 'correct-answer' : ''}`} disabled={feedback !== null}
+                  <button
+                    key={index}
+                    onClick={() => handleAnswer(index)}
+                    className={`option-button ${showCorrectAnswer && index === questionCatalog[currentQuestionIndex].correctOptionIndex ? 'correct-answer' : ''} ${selectedAnswerIndex === index ? 'selected-answer' : ''}`}
+                    disabled={feedback !== null}
                   >
                     {option}
                   </button>
